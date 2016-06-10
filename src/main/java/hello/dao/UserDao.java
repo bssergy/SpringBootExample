@@ -1,6 +1,9 @@
 package hello.dao;
 
 import hello.models.User;
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +14,9 @@ import java.util.List;
 @Repository
 @Transactional
 public class UserDao {
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public void create(User user) {
         entityManager.persist(user);
@@ -24,7 +30,8 @@ public class UserDao {
     }
 
     public List getAll() {
-        return entityManager.createQuery("from User").getResultList();
+        //return entityManager.createQuery("from User").getResultList();
+        return sessionFactory.getCurrentSession().createCriteria(User.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
     public User getByEmail(String email) {
