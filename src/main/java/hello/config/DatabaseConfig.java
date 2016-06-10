@@ -62,12 +62,21 @@ public class DatabaseConfig {
         return entityManagerFactory;
     }
 
-    @Autowired
+    /*@Autowired
     @Bean(name = "transactionManager")
     public HibernateTransactionManager getTransactionManager(
             SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager(
                 sessionFactory);
+
+        return transactionManager;
+    }*/
+
+    @Autowired
+    @Bean(name = "transactionManager")
+    public JpaTransactionManager transactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
     }

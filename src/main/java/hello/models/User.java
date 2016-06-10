@@ -10,13 +10,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    private long id;
+    private Long id;
 
     @NotNull
     private String email;
 
     @NotNull
-    private String name;
+    private String username;
 
     public User() { }
 
@@ -24,16 +24,16 @@ public class User {
         this.id = id;
     }
 
-    public User(String email, String name) {
+    public User(String email, String username) {
         this.email = email;
-        this.name = name;
+        this.username = username;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,11 +45,12 @@ public class User {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
 }
